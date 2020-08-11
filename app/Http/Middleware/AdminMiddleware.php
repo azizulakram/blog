@@ -16,14 +16,11 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->usertype == 'admin')
-        {
+       
+           if(Auth::user()->usertype != 'admin'){
+            return redirect('/home');
+           }
             return $next($request);
-        }
-        else
-        {
-            return redirect('/home')->with('status', 'You are not allowed to access this page');
-        }
         
     }
 }
